@@ -39,6 +39,21 @@ RUN set -x \
               g++-7 \
  && true
 
+ RUN set -x \
+  && apt-get update \
+  && apt-get install --no-install-recommends --no-install-suggests -y \
+              golang \
+              ca-certificates \
+              git \
+              curl \
+  && export PATH=$PATH:$GOPATH/bin \
+  && mkdir -p $GOPATH/bin \
+  && curl https://glide.sh/get | sh \
+  && cd hello-backend \
+  && glide up \
+  && glide install \
+  && go build -o /app/server server.go
+
  RUN true \
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
 # (which is done after we install the built packages so we don't have to redownload any overlapping dependencies)
@@ -109,8 +124,10 @@ RUN set -x \
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
+RUN mkdir /conf
+
 EXPOSE 80
 
 STOPSIGNAL SIGTERM
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;", "&&", "src/otelcol_linux_amd64-0.17-beta", "--config", "/conf/otel-collector-config.yml;"]
