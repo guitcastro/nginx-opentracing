@@ -39,21 +39,6 @@ RUN set -x \
               g++-7 \
  && true
 
- RUN set -x \
-  && apt-get update \
-  && apt-get install --no-install-recommends --no-install-suggests -y \
-              golang \
-              ca-certificates \
-              git \
-              curl \
-  && export PATH=$PATH:$GOPATH/bin \
-  && mkdir -p $GOPATH/bin \
-  && curl https://glide.sh/get | sh \
-  && cd hello-backend \
-  && glide up \
-  && glide install \
-  && go build -o /app/server server.go
-
  RUN true \
 # reset apt-mark's "manual" list so that "purge --auto-remove" will remove all build dependencies
 # (which is done after we install the built packages so we don't have to redownload any overlapping dependencies)
