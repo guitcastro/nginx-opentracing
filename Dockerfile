@@ -115,4 +115,4 @@ EXPOSE 80 55680 55679
 
 STOPSIGNAL SIGTERM
 
-CMD ["nginx", "-g", "daemon off;", "&&", "src/otelcol_linux_amd64-0.17-beta", "--config", "/conf/otel-collector-config.yml;"]
+CMD ["nginx -g daemon off; && ./src/otelcol_contrib_linux_amd64-0.17-beta --config /conf/otel-collector-config.yml;"]
