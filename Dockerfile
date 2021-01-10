@@ -115,4 +115,6 @@ EXPOSE 80 55680 55679
 
 STOPSIGNAL SIGTERM
 
-CMD ["nginx -g daemon off; && ./src/otelcol_contrib_linux_amd64-0.17-beta --config /conf/otel-collector-config.yml;"]
+RUN wget https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/download/v0.17.0/otelcontribcol_linux_amd64
+
+CMD "src/run_docker.sh"
