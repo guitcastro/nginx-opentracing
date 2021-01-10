@@ -111,7 +111,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 RUN mkdir /conf
 
-EXPOSE 80
+EXPOSE 80 55680 55679
 
 STOPSIGNAL SIGTERM
 
