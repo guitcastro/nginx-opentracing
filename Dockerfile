@@ -118,5 +118,6 @@ STOPSIGNAL SIGTERM
 RUN wget https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/download/v0.17.0/otelcontribcol_linux_amd64
 
 COPY ./run_docker.sh ./run_docker.sh
+RUN chmod +x otelcontribcol_linux_amd64
 
 CMD "run_docker.sh"
