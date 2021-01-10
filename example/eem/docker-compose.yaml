@@ -10,7 +10,7 @@ services:
     ports:
       - "8080:8080"
   otel:
-    image: otel/opentelemetry-collector-dev:latest
+    image: otel/opentelemetry-collector-contrib-dev:latest
     volumes:
       - ./otel.yml:/conf/otel-collector-config.yml
     command: /otel --config=/conf/otel-collector-config.yml

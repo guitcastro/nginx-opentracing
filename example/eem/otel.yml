@@ -1,34 +1,38 @@
 receivers:
-    otlp:
-      protocols:
-        grpc:
-    hostmetrics: 
-      collection_interval: 1m
-      scrapers:
-        load:
-        memory:
+  jaeger:
+    protocols:
+      thrift_compact:
+  otlp:
+    protocols:
+      grpc:
+  hostmetrics: 
+    collection_interval: 1m
+    scrapers:
+      load:
+      memory:
 
-  processors:
-    batch: null
-    queued_retry: null
+processors:
+  batch: null
+  queued_retry: null
 
-  exporters:
-    elastic:
-      apm_server_url: 'https://elasticapm.example.com' 
-      secret_token: 'APM_SERVER_SECRET_TOKEN'
+exporters:
+  elastic:
+    apm_server_url: '***REMOVED***' 
+    secret_token: '***REMOVED***'
 
-  service:
-    pipelines:
-      metrics:
-        receivers:
-          - otlp
-          - hostmetrics
-        exporters:
-          - elastic 
-      traces:
-        receivers:
-          - otlp
-        processors:
-          - batch
-        exporters:
-          - elastic 
+service:
+  pipelines:
+    metrics:
+      receivers:
+        - otlp
+        - hostmetrics
+      exporters:
+        - elastic 
+    traces:
+      receivers:
+        - otlp
+        - jaeger
+      processors:
+        - batch
+      exporters:
+        - elastic 

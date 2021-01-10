@@ -1,5 +1,5 @@
 {
-  "service_name": "nginx",
+  "service_name": "nginx-eem-sso",
   "diabled": false,
   "propagation_format": "w3c",
   "reporter": {
