@@ -119,5 +119,6 @@ RUN wget https://github.com/open-telemetry/opentelemetry-collector-contrib/relea
 
 COPY ./run_docker.sh /run_docker.sh
 RUN chmod +x otelcontribcol_linux_amd64
+RUN chmod +x /run_docker.sh
 
-CMD "run_docker.sh"
+CMD "/run_docker.sh"
